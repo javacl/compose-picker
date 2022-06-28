@@ -14,13 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
-import coil.compose.AsyncImage
 import java.io.File
 
 @Composable
 fun MainScreen() {
-
-    var uriPath by remember { mutableStateOf(Uri.parse("")) }
 
     val context = LocalContext.current
 
@@ -78,8 +75,6 @@ fun MainScreen() {
                 "${context.packageName}.provider",
                 photoFile
             )
-
-            uriPath = uri
             cameraTakePictureLauncher.launch(uri)
         }) {
             Text(text = "Camera Take Picture")
@@ -90,10 +85,5 @@ fun MainScreen() {
         }) {
             Text(text = "Camera Take Video")
         }
-        AsyncImage(
-            model = uriPath,
-            contentDescription = null,
-            modifier = Modifier.size(100.dp)
-        )
     }
 }
